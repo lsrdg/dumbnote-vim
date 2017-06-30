@@ -6,21 +6,16 @@ endif
 let b:did_ftplugin = 1
 
 " Define path
-"
 
 let s:DumbNotePath = expand("<sfile>:p:h:h")
-
 let s:currentworkingdirectory = getcwd()
 
+set iskeyword+=[,]
 set path=s:DumbNotePath
-
-if !exists('OpenIndexMap')
-        let g:OpenIndexMap = "<leader>zo"
-endif
 
 " Set the default collection
 "
-if !exists('DefaultCollection')
+if !exists('g:DefaultCollection')
     let g:DefaultCollection = $HOME . "/dumbnote/"
 endif
 
@@ -28,7 +23,8 @@ if !isdirectory(g:DefaultCollection)
     call mkdir(g:DefaultCollection)
 endif
 
-if !exists('CreateCollectionMap')
+
+if !exists('g:CreateCollectionMap')
     let g:CreateCollectionMap = "<leader>zc"
 endif
 
@@ -54,11 +50,13 @@ function! CreateCollection()
 
 endfunction
 
-execute "nnoremap" CreateCollectionMap '<esc>:call CreateCollection()<cr>'
+execute "nnoremap" g:CreateCollectionMap '<esc>:call CreateCollection()<cr>'
+
+
 
 " Map to create or open a new note
 "
-if !exists('CreateNoteMap')
+if !exists('g:CreateNoteMap')
     let g:CreateNoteMap = "<leader>za"
 endif
 
@@ -70,7 +68,6 @@ function! NoteNameInput()
     call inputrestore()
     return s:NoteName
 endfunction
-
 
 function! CreateNote()
 
@@ -84,71 +81,77 @@ function! CreateNote()
 
 endfunction
 
-execute "nnoremap" CreateNoteMap '<esc>:call CreateNote()<cr>'
+execute "nnoremap" g:CreateNoteMap '<esc>:call CreateNote()<cr>'
 
-if !exists("OpenNoteMap")
+
+
+if !exists('g:OpenNoteMap')
     let g:OpenNoteMap = "<leader>zz"
 endif
 
-function! OpenNote()
-    let pattern = '/^#/'
+execute "nnoremap" g:OpenNoteMap '<esc>:e' g:DefaultCollection 
 
-    execute '1lvimgrep ' . pattern . g:DefaultCollection . "*.md"
-    execute 'vert lopen 35'
 
-    execute 'setlocal modifiable'
-    execute '%normal! dt#'
-endfunction
 
-execute "nnoremap" OpenNoteMap '<esc>:call OpenNote()<cr>'
-
-function! OpenIndex()
-
-    echo s:currentworkingdirectory
-
-    if filereadable("collections/index.md")
-
-	let s:indexfile = findfile("collections/index.md")
-
-	echom "Uhu"
-	execute "e collections/index.md"
-
-    else
-	echom "You should have an index file, damn!"
-	echom "Here it goes"
-	execute "e collections/index.md"
-    endif
-endfunction
-
-execute "nnoremap" OpenIndexMap '<esc>:call OpenIndex()<cr>'
-
-if !exists('CreateLinkMap')
-    let g:CreateLinkMap = "<enter>"
+if !exists('g:ListNotesMap')
+    let g:ListNotesMap = "<leader>zl"
 endif
 
-function! CreateLink()
-    let s:Link = expand("<cword>")
-
-" \[\{2}\a\+[^\s]]\{2}    
-" \(\s\|[\)\<
-
-    "if s:Link =~? "\[\{2}\<\a\+[^\s]\>]\{2}"
-    let s:pattern = s:Link =~? "[\{2}\<\a\+[^\s]\>]\{2}"
-    if s:pattern
-        echom "uhuuuuu"
-
-    elseif !s:pattern
-        echom "Ooooops"
-	execute "normal! ?\<\<cr>i[["
-	"execute "normal! ea]]"
-        "execute "normal! :s/\<<C-r><C-w>\>/\[[\<<C-r><C-w>\>]]/"
-
-    else
-	echom "num funfa..."
-    endif	
-
-
+function! ListNotes()
+    execute "vsplit " . g:DefaultCollection
 endfunction
 
-execute "nnoremap" CreateLinkMap '<esc>:call CreateLink()<cr>'
+execute "nnoremap" g:ListNotesMap '<esc>:call ListNotes()<cr>'
+
+
+
+"	if !exists('g:OpenIndexMap')
+"	        let g:OpenIndexMap = "<leader>zo"
+"	endif
+"	
+"	if !exists('g:MainIndexPath')
+"	    let g:MainIndexPath = g:DefaultCollection . "index.md"
+"	endif
+"	
+"	function! OpenIndex()
+"	
+"	    if !filereadable(g:MainIndexPath)
+"		execute "e " . g:MainIndexPath
+"	
+"	    else filereadable(g:MainIndexPath)
+"		execute "e " . g:MainIndexPath
+"	    endif
+"	
+"	endfunction
+"	
+"	execute "nnoremap" g:OpenIndexMap '<esc>:call OpenIndex()<cr>'
+"	
+"	
+"	
+"	if !exists('g:CreateLinkMap')
+"	    let g:CreateLinkMap = "<enter>"
+"	endif
+"	
+"	function! CreateLink()
+"	    let s:Link = expand("<cword>")
+"	    let s:pattern = "\v\[{2}\w+\]{2}"
+"	    let s:matchLinkPattern = s:Link =~? s:pattern
+"	
+"	    if s:Link
+"	        echom "uhuuuuu"
+"	
+"	    elseif s:Link !=? s:pattern
+"	        echom "Ooooops"
+"		"execute "normal! ?\<\<cr>i[["
+"		"execute "normal! ea]]"
+"	        "execute "normal! :s/\<<C-r><C-w>\>/\[[\<<C-r><C-w>\>]]/"
+"	
+"	    else
+"		echom "num funfa..."
+"	    endif	
+"	
+"	
+"	endfunction
+"	
+"	execute "nnoremap" g:CreateLinkMap '<esc>:call CreateLink()<cr>'
 
