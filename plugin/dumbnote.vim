@@ -8,77 +8,77 @@ set path=s:DumbNotePath
 
 " Set the default collection
 "
-if !exists('g:DefaultCollection')
-    let g:DefaultCollection = $HOME . "/dumbnote/"
+if !exists('g:dumbnoteDefaultCollection')
+    let g:dumbnoteDefaultCollection = $HOME . "/dumbnote/"
 endif
 
-if !isdirectory(g:DefaultCollection)
-    call mkdir(g:DefaultCollection)
+if !isdirectory(g:dumbnoteDefaultCollection)
+    call mkdir(g:dumbnoteDefaultCollection)
 endif
 
 
-if !exists('g:CreateCollectionMap')
-    let g:CreateCollectionMap = "<leader>zc"
+if !exists('g:dumbnoteCreateCollectionMap')
+    let g:dumbnoteCreateCollectionMap = "<leader>zc"
 endif
 
-execute "nnoremap" g:CreateCollectionMap '<esc>:call dumbnote#dumbnote#DumbnoteCreateCollection()<cr>'
+execute "nnoremap" g:dumbnoteCreateCollectionMap '<esc>:call dumbnote#dumbnote#DumbnoteCreateCollection()<cr>'
 
 
 
 " Map to create or open a new note
 "
-if !exists('g:CreateNoteMap')
-    let g:CreateNoteMap = "<leader>za"
+if !exists('g:dumbnoteCreateNoteMap')
+    let g:dumbnoteCreateNoteMap = "<leader>za"
 endif
 
 
 
-execute "nnoremap" g:CreateNoteMap '<esc>:call dumbnote#dumbnote#DumbnoteCreateNote()<cr>'
+execute "nnoremap" g:dumbnoteCreateNoteMap '<esc>:call dumbnote#dumbnote#DumbnoteCreateNote()<cr>'
 
 
 
-if !exists('g:OpenNoteMap')
-    let g:OpenNoteMap = "<leader>zz"
+if !exists('g:dumbnoteOpenNoteMap')
+    let g:dumbnoteOpenNoteMap = "<leader>zz"
 endif
 
-execute "nnoremap" g:OpenNoteMap '<esc>:e' g:DefaultCollection 
+execute "nnoremap" g:dumbnoteOpenNoteMap '<esc>:e' g:dumbnoteDefaultCollection 
 
 
 
-if !exists('g:ListNotesMap')
-    let g:ListNotesMap = "<leader>zl"
+if !exists('g:dumbnoteListNotesMap')
+    let g:dumbnoteListNotesMap = "<leader>zl"
 endif
 
 
-execute "nnoremap" g:ListNotesMap '<esc>:call dumbnote#dumbnote#DumbnoteListNotes()<cr>'
+execute "nnoremap" g:dumbnoteListNotesMap '<esc>:call dumbnote#dumbnote#DumbnoteListNotes()<cr>'
 
 
 
-"	if !exists('g:OpenIndexMap')
-"	        let g:OpenIndexMap = "<leader>zo"
+"	if !exists('g:dumbnoteOpenIndexMap')
+"	        let g:dumbnoteOpenIndexMap = "<leader>zo"
 "	endif
 "	
-"	if !exists('g:MainIndexPath')
-"	    let g:MainIndexPath = g:DefaultCollection . "index.md"
+"	if !exists('g:dumbnoteMainIndexPath')
+"	    let g:dumbnoteMainIndexPath = g:dumbnoteDefaultCollection . "index.md"
 "	endif
 "	
 "	function! OpenIndex()
 "	
-"	    if !filereadable(g:MainIndexPath)
-"		execute "e " . g:MainIndexPath
+"	    if !filereadable(g:dumbnoteMainIndexPath)
+"		execute "e " . g:dumbnoteMainIndexPath
 "	
-"	    else filereadable(g:MainIndexPath)
-"		execute "e " . g:MainIndexPath
+"	    else filereadable(g:dumbnoteMainIndexPath)
+"		execute "e " . g:dumbnoteMainIndexPath
 "	    endif
 "	
 "	endfunction
 "	
-"	execute "nnoremap<plug>" g:OpenIndexMap '<esc>:call dumbnote#OpenIndex()<cr>'
+"	execute "nnoremap<plug>" g:dumbnoteOpenIndexMap '<esc>:call dumbnote#OpenIndex()<cr>'
 "	
 "	
 "	
-"	if !exists('g:CreateLinkMap')
-"	    let g:CreateLinkMap = "<enter>"
+"	if !exists('g:dumbnoteCreateLinkMap')
+"	    let g:dumbnoteCreateLinkMap = "<enter>"
 "	endif
 "	
 "	function! DumbnoteCreateLink()
@@ -102,5 +102,5 @@ execute "nnoremap" g:ListNotesMap '<esc>:call dumbnote#dumbnote#DumbnoteListNote
 "	
 "	endfunction
 "	
-"	execute "nnoremap<plug>" g:CreateLinkMap '<esc>:call dumbnote#CreateLink()<cr>'
+"	execute "nnoremap<plug>" g:dumbnoteCreateLinkMap '<esc>:call dumbnote#CreateLink()<cr>'
 
