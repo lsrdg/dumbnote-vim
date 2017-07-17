@@ -4,7 +4,7 @@ function! dumbnote#dumbnote#DumbnoteCreateCollection()
 
     let s:CollectionName = input("Collection's name, please: ")
     call inputrestore()
-    let s:CollectionPath = g:DefaultCollection . s:CollectionName . "/"
+    let s:CollectionPath = g:dumbnoteDefaultCollection . s:CollectionName . "/"
 
     if !isdirectory(s:CollectionPath)
 	call mkdir(s:CollectionPath)
@@ -33,7 +33,7 @@ function! dumbnote#dumbnote#DumbnoteCreateNote()
 
     call dumbnote#dumbnote#DumbnoteNoteNameInput()
 
-    let s:NotePath = g:DefaultCollection . s:NoteName . ".md"
+    let s:NotePath = g:dumbnoteDefaultCollection . s:NoteName . ".md"
 
     execute "e " . s:NotePath
     execute "normal! i# " . s:NoteName
@@ -42,5 +42,5 @@ function! dumbnote#dumbnote#DumbnoteCreateNote()
 endfunction
 
 function! dumbnote#dumbnote#DumbnoteListNotes()
-    execute "vsplit " . g:DefaultCollection
+    execute "vsplit " . g:dumbnoteDefaultCollection
 endfunction
