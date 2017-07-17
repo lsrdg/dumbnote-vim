@@ -1,10 +1,3 @@
-" Only do this when not done yet for this buffer
-if exists("b:did_ftplugin")
-  finish
-endif
-
-let b:did_ftplugin = 1
-
 " Define path
 
 let s:DumbNotePath = expand("<sfile>:p:h:h")
@@ -28,29 +21,7 @@ if !exists('g:CreateCollectionMap')
     let g:CreateCollectionMap = "<leader>zc"
 endif
 
-function! CreateCollection()
-    
-    call inputsave()
-
-    let s:CollectionName = input("Collection's name, please: ")
-    call inputrestore()
-    let s:CollectionPath = g:DefaultCollection . s:CollectionName . "/"
-
-    if !isdirectory(s:CollectionPath)
-	call mkdir(s:CollectionPath)
-    endif
-
-    let s:CollectionIndex = s:CollectionPath . s:CollectionName . ".md"
-
-    if !filereadable(s:CollectionIndex) 
-	execute "e " . s:CollectionIndex
-    endif
-
-    execute "normal! i# " . s:CollectionName
-
-endfunction
-
-execute "nnoremap" g:CreateCollectionMap '<esc>:call CreateCollection()<cr>'
+execute "nnoremap" g:CreateCollectionMap '<esc>:call dumbnote#dumbnote#DumbnoteCreateCollection()<cr>'
 
 
 
@@ -60,28 +31,9 @@ if !exists('g:CreateNoteMap')
     let g:CreateNoteMap = "<leader>za"
 endif
 
-function! NoteNameInput()
-
-    call inputsave()
-
-    let s:NoteName = input("Note: ")
-    call inputrestore()
-    return s:NoteName
-endfunction
-
-function! CreateNote()
-
-    call NoteNameInput()
-
-    let s:NotePath = g:DefaultCollection . s:NoteName . ".md"
-
-    execute "e " . s:NotePath
-    execute "normal! i# " . s:NoteName
 
 
-endfunction
-
-execute "nnoremap" g:CreateNoteMap '<esc>:call CreateNote()<cr>'
+execute "nnoremap" g:CreateNoteMap '<esc>:call dumbnote#dumbnote#DumbnoteCreateNote()<cr>'
 
 
 
@@ -97,11 +49,8 @@ if !exists('g:ListNotesMap')
     let g:ListNotesMap = "<leader>zl"
 endif
 
-function! ListNotes()
-    execute "vsplit " . g:DefaultCollection
-endfunction
 
-execute "nnoremap" g:ListNotesMap '<esc>:call ListNotes()<cr>'
+execute "nnoremap" g:ListNotesMap '<esc>:call dumbnote#dumbnote#DumbnoteListNotes()<cr>'
 
 
 
@@ -124,7 +73,7 @@ execute "nnoremap" g:ListNotesMap '<esc>:call ListNotes()<cr>'
 "	
 "	endfunction
 "	
-"	execute "nnoremap" g:OpenIndexMap '<esc>:call OpenIndex()<cr>'
+"	execute "nnoremap<plug>" g:OpenIndexMap '<esc>:call dumbnote#OpenIndex()<cr>'
 "	
 "	
 "	
@@ -132,7 +81,7 @@ execute "nnoremap" g:ListNotesMap '<esc>:call ListNotes()<cr>'
 "	    let g:CreateLinkMap = "<enter>"
 "	endif
 "	
-"	function! CreateLink()
+"	function! DumbnoteCreateLink()
 "	    let s:Link = expand("<cword>")
 "	    let s:pattern = "\v\[{2}\w+\]{2}"
 "	    let s:matchLinkPattern = s:Link =~? s:pattern
@@ -153,5 +102,5 @@ execute "nnoremap" g:ListNotesMap '<esc>:call ListNotes()<cr>'
 "	
 "	endfunction
 "	
-"	execute "nnoremap" g:CreateLinkMap '<esc>:call CreateLink()<cr>'
+"	execute "nnoremap<plug>" g:CreateLinkMap '<esc>:call dumbnote#CreateLink()<cr>'
 
