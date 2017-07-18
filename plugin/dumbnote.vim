@@ -12,10 +12,13 @@ if !exists('g:dumbnoteDefaultCollection')
     let g:dumbnoteDefaultCollection = $HOME . "/dumbnote/"
 endif
 
+if !exists('g:dumbnoteFileFormat')
+    let g:dumbnoteFileFormat = ".md"
+endif
+
 if !isdirectory(g:dumbnoteDefaultCollection)
     call mkdir(g:dumbnoteDefaultCollection)
 endif
-
 
 if !exists('g:dumbnoteCreateCollectionMap')
     let g:dumbnoteCreateCollectionMap = "<leader>zc"

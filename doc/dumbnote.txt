@@ -22,11 +22,13 @@ CONTENTS					  *DumbnoteContents*
 Section 1: Introduction                       *DumbnoteIntroduction*
 
 Dumbnote takes a (user-defined) directory as being a "collection of
-markdown (*.md) files, which may or may not contain subdirectories
-with more *.md files.
+text files, if not otherwise defined, it will create markdown (*.md) 
+files, which may or may not contain subdirectories with more text 
+files.
 
 The plugin then will allow the user to quickly create and open
-notes (*.md files) and collections (directories with *.md files).
+notes (*.md, *.txt, etc files) and collections (directories with text
+files).
 
 All the mappings are prefixed with `<leader>z` by default. But all
 of them can be redefined by the user.
@@ -48,6 +50,8 @@ Support to wiki links is planned, but not yet implemented.
 
 ====================================================================
 Section 2: Usage    	                             *DumbnoteUsage*
+						*dumbnoteFileFormat*
+					 *dumbnoteDefaultCollection*
 
 By the default, the collection's directory is `~/dumbnote`. 
 If, for example, you want your notes to be placed into 
@@ -67,6 +71,11 @@ notes (files) on that path.
 Just in case it is not clear enough yet: you don't actually need to 
 do anything. If you just installed the plugin and run the mapping
 to create a new note, the note will be created inside `~/dumbnote/`.
+
+By default a note is a *.md file. To change that to, for example
+*.txt, just use:
+    
+    let g:dumbnoteFileFormat = ".txt"
 
 ====================================================================
 Section 3: Mappings                       	  *DumbnoteMappings*

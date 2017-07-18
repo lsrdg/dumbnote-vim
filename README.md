@@ -29,10 +29,12 @@ really appreciated.
 However, if you are really looking for a note taking machine, scroll down for a
 list of alternatives.
 
-## Markdown
+## File format
 
 It was the main idea of the plugin: a note taker that would support markdown and
-let the user decide how to deal with markdown. 
+let the user decide how to deal with markdown. By default, all notes will have
+the `.md` file extension. However, you can use whatever file format you prefer
+just by seeting the `g:dumbnoteFileFormat` variable.
 
 I have my own [dumb configs](https://github.com/lsrdg/markdumb.vim) for dealing 
 with markdown, and that's why it was important to consider a way to keep the 
@@ -40,6 +42,10 @@ filetype as markdown.
 
 Another important point was to make it as seamless as possible to publish the
 notes with e.g. [Jekyll](http://jekyllrb.com/).
+
+By not imposing a specific file format, I hope the user will be able to
+partially
+keep the best of its workflow.
 
 ## Collections
 
@@ -54,6 +60,8 @@ Without time to really learn how to use a new tool and [unable to effectively
 use](https://github.com/vimwiki/vimwiki/issues/345)
 Vimwiki, Dumbnote is already being tested every day, but it will take quite a
 few weeks until it gets stable and with an useful documentation.
+
+By the way, it won't work on Windows, or at least it was tested only on Linux.
 
 ## Alternatives
 

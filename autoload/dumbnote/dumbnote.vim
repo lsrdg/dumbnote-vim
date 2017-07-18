@@ -10,7 +10,7 @@ function! dumbnote#dumbnote#DumbnoteCreateCollection()
 	call mkdir(s:CollectionPath)
     endif
 
-    let s:CollectionIndex = s:CollectionPath . s:CollectionName . ".md"
+    let s:CollectionIndex = s:CollectionPath . s:CollectionName . g:dumbnoteFileFormat
 
     if !filereadable(s:CollectionIndex) 
 	execute "e " . s:CollectionIndex
@@ -33,7 +33,7 @@ function! dumbnote#dumbnote#DumbnoteCreateNote()
 
     call dumbnote#dumbnote#DumbnoteNoteNameInput()
 
-    let s:NotePath = g:dumbnoteDefaultCollection . s:NoteName . ".md"
+    let s:NotePath = g:dumbnoteDefaultCollection . s:NoteName . g:dumbnoteFileFormat
 
     execute "e " . s:NotePath
     execute "normal! i# " . s:NoteName
