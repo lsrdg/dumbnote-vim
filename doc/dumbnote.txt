@@ -58,7 +58,7 @@ If, for example, you want your notes to be placed into
 `/home/myusername/myvimscripts/dumbnote/collections`, add this to
 your .vimrc (or init.vim):
 
-    let g:dumbnoteDefaultCollection = "/home/myusername/myvimscripts/dumbnote/collections"
+    let g:dumbnoteDefaultCollection = $HOME . "/myvimscripts/dumbnote/collections"
 
 The "collections" are just normal directories, as the "notes" are 
 merely markdown plaintext files. Just use the system's tools to move
