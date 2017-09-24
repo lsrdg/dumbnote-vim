@@ -1,3 +1,8 @@
+" function! dumbnote#dumbnote#DumbnoteOpenNote(...)
+" 
+"     echom a:1
+" endfunction
+
 function! dumbnote#dumbnote#DumbnoteCreateCollection()
     
     call inputsave()
@@ -24,16 +29,21 @@ function! dumbnote#dumbnote#DumbnoteNoteNameInput()
 
     call inputsave()
 
-    let s:NoteName = input("Note: ")
+    let s:NoteName = input("Note: ", "", g:dumbnoteDefaultCollection)
     call inputrestore()
     return s:NoteName
 endfunction
 
+
+" g:dumbnoteDefaultCollection . 
+"
 function! dumbnote#dumbnote#DumbnoteCreateNote()
 
-    call dumbnote#dumbnote#DumbnoteNoteNameInput()
+    call inputsave()
+    let s:NoteName = input("Note: ", "", 'g:dumbnoteDefaultCollection')
+    call inputrestore()
 
-    let s:NotePath = g:dumbnoteDefaultCollection . s:NoteName . g:dumbnoteFileFormat
+    let s:NotePath = s:NoteName . g:dumbnoteFileFormat
 
     execute "e " . s:NotePath
     execute "normal! i# " . s:NoteName
@@ -43,4 +53,9 @@ endfunction
 
 function! dumbnote#dumbnote#DumbnoteListNotes()
     execute "vsplit " . g:dumbnoteDefaultCollection
+endfunction
+
+function! dumbnote#dumbnote#DumbnoteDelete(paths)
+    let delete_arg = a:paths
+    call delete(delete_arg)
 endfunction

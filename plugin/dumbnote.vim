@@ -4,13 +4,15 @@ let s:DumbNotePath = expand("<sfile>:p:h:h")
 let s:currentworkingdirectory = getcwd()
 
 set iskeyword+=[,]
-set path=s:DumbNotePath
+"set path=.,s:DumbNotePath
 
 " Set the default collection
 "
 if !exists('g:dumbnoteDefaultCollection')
     let g:dumbnoteDefaultCollection = $HOME . "/dumbnote/"
 endif
+
+"set path=.,g:dumbnoteDefaultCollection
 
 if !exists('g:dumbnoteFileFormat')
     let g:dumbnoteFileFormat = ".md"
@@ -47,6 +49,21 @@ endif
 execute "nnoremap" g:dumbnoteOpenNoteMap '<esc>:e' g:dumbnoteDefaultCollection 
 
 
+function! DumbnoteOpenNote(...)
+    let Note = a:1
+    execute "e " Note 
+endfunction
+
+function! DumbnotePathsCompletion(ArgLead, CmdLine, CursorPos)
+    let myList = split(globpath(g:dumbnoteDefaultCollection, '**/*'), '\n')
+    return filter(myList, 'v:val =~ "^'. a:ArgLead .'"')
+endfunction
+
+command! -bang -complete=customlist,DumbnotePathsCompletion -nargs=* DumbnoteOpenNote call DumbnoteOpenNote(<f-args>)
+"-------------------------------------------
+
+command! -bang -complete=customlist,DumbnotePathsCompletion -nargs=+ DumbnoteCreateNote call dumbnote#dumbnote#DumbnoteCreateNote(<f-args>)
+
 
 if !exists('g:dumbnoteListNotesMap')
     let g:dumbnoteListNotesMap = "<leader>zl"
@@ -54,6 +71,12 @@ endif
 
 
 execute "nnoremap" g:dumbnoteListNotesMap '<esc>:call dumbnote#dumbnote#DumbnoteListNotes()<cr>'
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Delete note(s) and collection(s)
+"
+command! -nargs=1 -complete=file DumbnoteDelete
+    \ :execute dumbnote#dumbnote#DumbnoteDelete(<f-args>)
 
 
 
