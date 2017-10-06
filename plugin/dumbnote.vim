@@ -46,7 +46,7 @@ if !exists('g:dumbnoteOpenNoteMap')
     let g:dumbnoteOpenNoteMap = "<leader>zz"
 endif
 
-execute "nnoremap" g:dumbnoteOpenNoteMap '<esc>:e' g:dumbnoteDefaultCollection 
+execute "nnoremap" g:dumbnoteOpenNoteMap '<esc>:DumbnoteOpenNote '
 
 
 function! DumbnoteOpenNote(...)
