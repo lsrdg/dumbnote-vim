@@ -54,6 +54,13 @@ Dumbnote.vim it means a directory with a bunch of `*.md` files.
 
 At the moment, there's a really limited support to multiple collections.
 
+## Basic workflow
+
+To list/view/open your notes, you can use the `:DumbnoteOpenNote ` command 
+with `<tab>` completion or with `<c-d>` wild menu. Just open a note and work 
+on it. The note doesn't exists? Just give it a name, a file extension and
+hit enter. It is the same as using the `:e ` command.
+
 ## Another warning
 
 Without time to really learn how to use a new tool and [unable to effectively
