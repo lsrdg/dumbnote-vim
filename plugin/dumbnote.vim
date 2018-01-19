@@ -1,3 +1,12 @@
+" Auto save
+
+augroup autosave
+  autocmd!
+  autocmd CursorHold,CursorHoldI,BufLeave,BufWinLeave,
+        \QuitPre,FocusLost,CursorMovedI,CursorMoved,
+        \InsertLeave * update
+augroup END
+
 " Define path
 
 let s:DumbNotePath = expand("<sfile>:p:h:h")
@@ -62,7 +71,7 @@ endfunction
 command! -bang -complete=customlist,DumbnotePathsCompletion -nargs=* DumbnoteOpenNote call DumbnoteOpenNote(<f-args>)
 "-------------------------------------------
 
-command! -bang -complete=customlist,DumbnotePathsCompletion -nargs=+ DumbnoteCreateNote call dumbnote#dumbnote#DumbnoteCreateNote(<f-args>)
+" command! -bang -complete=customlist,DumbnotePathsCompletion -nargs=+ DumbnoteCreateNote call dumbnote#dumbnote#DumbnoteCreateNote(<f-args>)
 
 
 if !exists('g:dumbnoteListNotesMap')
@@ -75,7 +84,7 @@ execute "nnoremap" g:dumbnoteListNotesMap '<esc>:call dumbnote#dumbnote#Dumbnote
 """"""""""""""""""""""""""""""""""""""""""""""
 " Delete note(s) and collection(s)
 "
-command! -nargs=1 -complete=file DumbnoteDelete
+" command! -nargs=1 -complete=file DumbnoteDelete
     \ :execute dumbnote#dumbnote#DumbnoteDelete(<f-args>)
 
 

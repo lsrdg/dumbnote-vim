@@ -61,12 +61,15 @@ with `<tab>` completion or with `<c-d>` wild menu. Just open a note and work
 on it. The note doesn't exists? Just give it a name, a file extension and
 hit enter. It is the same as using the `:e ` command.
 
+Dumbnote will "autosave" every time you leave insert mode, don't do any anything
+for a while etc.
+
 ## Another warning
 
 Without time to really learn how to use a new tool and [unable to effectively
 use](https://github.com/vimwiki/vimwiki/issues/345)
 Vimwiki, Dumbnote is already being tested every day, but it will take quite a
-few weeks until it gets stable and with an useful documentation.
+few months until it gets stable and with an useful documentation.
 
 By the way, it won't work on Windows, or at least it was tested only on Linux.
 
