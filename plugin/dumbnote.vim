@@ -4,7 +4,7 @@ augroup autosave
   autocmd!
   autocmd CursorHold,CursorHoldI,BufLeave,BufWinLeave,
         \QuitPre,FocusLost,CursorMovedI,CursorMoved,
-        \InsertLeave * update
+        \InsertLeave *.md update
 augroup END
 
 " Define path
